@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>words_list</title>
+    <style>
+        .word_list_box{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="word_list_box"><h1>Words List</h1></div>
+    
+    <div class="word_list_box">
+        <table border="1" class="word_list_table">
+            <tr>
+                <th>word</th>
+                <th>translation</th>
+                <th>etra_info</th>
+                <th>final_modify_time</th>
+                <th colspan="2">operation</th>
+            </tr>
+            {% for word in words %}
+                <tr>
+                    <td>{{ word.word }}</td>
+                    <td>{{ word.translate_info }}</td>
+                    <td>{{ word.extra_info }}</td>
+                    <td>{{ word.time }}</td>
+                    <td><a href="#">修改</a></td>
+                    <td><a href="#">删除</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

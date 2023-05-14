@@ -10,8 +10,15 @@ import json
 def index(request):
     data = {}
     words_data = WordInfo.objects.all()
-    data['data'] = json.loads(serializers.serialize('json', words_data))
-    return JsonResponse(data)
+
+    # return json
+    # data['data'] = json.loads(serializers.serialize('json', words_data))
+    # return JsonResponse(data)
+    return render(request, 'words/word_list.html',context={
+        'words': words_data
+    })
+
+
 
 def add_word(request):
     if request.method == 'GET':
