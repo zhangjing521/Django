@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<h1>单词翻译列表</h1>
+<form methond="post" action="words/translate/">
+    {% csrf_token %}
+    <input type="text" name="words" placeholder="原单词">
+    <input type="text" name="translation" placeholder="译文">
+    <input type="text" name="additon" placeholder="备注">
+    <input type="submit" name="user" placeholder="翻译">
+
+<div>
+    <div class="container">
+        <div style="margin-bottom:10px">
+            <a class="btn btn-primary" href="/words/add/">添加单词</a>
+        </div>     
+</div>
+
+{% endblock %}

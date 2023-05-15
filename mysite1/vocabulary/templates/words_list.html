@@ -1,0 +1,93 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    
+<div>
+    <div class="container">
+        <div style="margin-bottom:10px" class = "clearfix">
+            <a class="btn btn-primary" href="/words/add/">添加单词</a>
+            <a class="btn btn-primary" href="/words/model/form/add/">添加单词ModelForm</a>
+        </div>     
+</div>
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">单词列表</div>
+
+    <div class="form-group" >
+        <label>按类型查找</label>
+        <select class="form-control" name="searching"> 
+            {% for item in searching_choices %}
+                <option value="{{ item.0 }}">{{ item.1 }}</option>
+            {% endfor %}
+            <option value="1">单词</option>
+            <option value="2">译文</option>
+            <option value="3">备注</option>
+            <option value="4">添加时间</option>
+        </select> 
+        
+            <div style="float ;width: 300px;">
+                <form method="get">
+                    <div class = "input-group">
+                        <input type="text" name="q" class="form-control" placeholder="按类型查找" value="{{ search_data }}">
+                        <span class="input-group-btn">
+                            <button class="form-control" type="submit" placeholder="查找">
+                                <span class = "glyphicon glyphicon-search" aria-hidden="true">查找</span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        <a class="btn btn-primary" href="#">查找</a>
+    </div>
+
+    <!-- Table -->
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>单词</th>
+            <th>译文</th>
+            <th>备注</th>
+            <th>添加时间</th>
+            <th>操作</th>
+
+        </tr>
+        </thead>
+        <tbody>
+            {% for obj in pretty_data %}
+                <tr>
+                    <td>{{ obj.id }}</td>
+                    <td>{{ obj.words }}</td>
+                    <td>{{ obj.translation }}</td>
+                    <td>{{ obj.additon }}</td>
+                    <td>{{ obj.add_time|date:"Y-m-d H:i:s"}}</td>
+                    <td>
+                        <a class="btn btn-primary" href="/words/{{obj.id}}/edit/">编辑</a>
+                        <a class="btn btn-danger" href="/words/delete/?nid={{obj.id}}">删除</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        
+        </tbody>
+    </table>
+    <ul class="pagination">
+        {% comment %} <li><a href="{{ head_page }}" aria-label="Previous"><span aria-hidden="true">首页</span></a></li> {% endcomment %}
+        {{ page_string }}
+        {% comment %} <li><a href="{{ end_page }}" aria-label="Next"><span aria-hidden="true">尾页</span></a></li> {% endcomment %}
+    
+    </ul>
+    <br>
+    
+    <form method="get">
+        <div style="display:inline-block; width: 150px;">
+            <div class="input-group">
+                <span> <input type="text" class="form-control" placeholder="请输入页码" name="page"></span>
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">跳转</button>
+                </span>
+            </div>
+        </div>
+    </form>
+    
+</div>
+{% endblock %}
